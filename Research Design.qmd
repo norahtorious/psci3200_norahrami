@@ -1,0 +1,203 @@
+---
+title: "Research Design"
+author: "Norah Rami"
+institute: "University of Pennsylvania"
+
+date: last-modified
+toc: true
+
+# bibliography: references.bib
+
+format: 
+  html:
+    self-contained: true
+
+editor: source
+---
+
+# Social Media Repression and Political Action
+
+Social media is a political battle between activists wishing to speak out against repression and governments wishing to control dissent. Canadian political scientist, Ronald Deibert defines this tension as the era of "contested access."[^1] As social media continues to be utilized to increase information access and encourage collective organizing, governments attempt to police free expression on social media platforms.[^2] In some cases these repressive measures have remained ineffective, while in others government attacks on free expression on social media platforms have resulted in documented self-censorship, neutralizing the potential of these platforms to be utilized as tools for resistance and information-sharing.[^3] One study found that even in the case of government censorship, the internet remained crucial in mobilizing political protests.[^4] However, at the same time, social media is not only a tool for democratic organizing—it has also been utilized as a means of weaponizing and mobilizing sentiment in order to harrass minorities or critics of the government. I am interested in how the presence of censorship upon social media impacts these dual utilities of social media. While the democratizing impacts of social media have been duly studied, I am also interested in the otherside of the coin.
+
+[^1]: Deibert, Ronald, John Palfrey, Rafal Rohozinski, and Jonathan Zittrain. *Access Contested: Security, Identity, and Resistance in Asian Cyberspace.* Cambridge: The MIT Press, 2012. <https://muse.jhu.edu/book/19777>.
+
+[^2]: Deibert, Ron. "Authoritarianism Goes Global: Cyberspace Under Siege." *Journal of Democracy* 26, no. 3 (2015): 64-78. [https://dx.doi.org/10.1353/jod.2015.0051](#0).\
+    PAN J, SIEGEL AA. How Saudi Crackdowns Fail to Silence Online Dissent. *American Political Science Review*. 2020;114(1):109-125. doi:10.1017/S0003055419000650.
+
+[^3]: PAN, JENNIFER, and ALEXANDRA A. SIEGEL. “How Saudi Crackdowns Fail to Silence Online Dissent.” *American Political Science Review* 114, no. 1 (2020): 109–25. https://doi.org/10.1017/S0003055419000650.
+
+    Ong E. Online Repression and Self-Censorship: Evidence from Southeast Asia. *Government and Opposition*. 2021;56(1):141-162. doi:10.1017/gov.2019.18.
+
+    Zeitzoff, T. (2017). How Social Media Is Changing Conflict. Journal of Conflict Resolution, 61(9), 1970-1991. <https://doi-org.proxy.library.upenn.edu/10.1177/0022002717721392>
+
+[^4]: Ruijgrok, Kris. 2016. “From the Web to the Streets: Internet and Protests under Authoritarian Regimes.” *Democratization* 24 (3): 498–520. doi:10.1080/13510347.2016.1223630.
+
+# Hypothesis
+
+### H1: Supression Hypothesis
+
+**Expectation:** The presence of [increased]{.underline} social media censorship will [reduce]{.underline} both democratic and extremist mobilization
+
+**Explanation:** When governments censor social media, it becomes more difficult for activists (regardless of positioning) to organize. This leads to **lower** political action.
+
+### H2: Backfire Hypothesis
+
+**Expectation:** The presence of [increased]{.underline} social media censorship will [reduce]{.underline} democratic political action, but [increase]{.underline} extremist mobilization.
+
+**Explanation:** Social media censorship has had a documented effect on increasing self-censorship of moderate actors. As a result, we will see that only more radical voices will persist online in terms of calling for political action.
+
+### H3: Selective Censorship
+
+**Expectation:** Social media censorship will [reduce]{.underline} extremist mobilization but [no effect]{.underline} on democratic activism
+
+**Explanation:** In order to maintain legitimacy, governments must be selective about what they choose to repress. They will have a greater interest in supressing the most extreme/ violent dissent.
+
+### H4: Open Harassment
+
+**Expectation:** Social media censorship will lead to an [increase]{.underline} in online harassment groups
+
+**Reasoning:** While the government has an interest in suppressing political dissent, harassment might directly serve their political rhetoric. Additionally, in the absence of political discussion online, groups may resotr to covert online harassment instead of open discourse.
+
+# Dataset
+
+I will be utilizing the VDem Dataset—an expert-coded data set that accounts for 202 countries. The variables of interest I am examining are from the Digital Society Survey, designed by the Digital Society Project. The principal investigators are Valeriya Mechkova, Daniel Pemstein, Brigitte Seim, and Steven Wilson.
+
+```{r}
+#| echo: false
+#| warning: false
+library (vdemdata)
+library(tidyverse)
+df_vdem <- vdem
+
+
+```
+
+## Variables of Interest
+
+**Government social media shut down in practice (v2smgovsm)**
+
+This variable measures how often the government shuts down social media access. I plan to create an index variable combining government social media shut down in practice, social media alternatives, social media monitoring, and social media censorship in practice.
+
+0: Extremely often. It is a regular practice for the government to shut down access to social media. 1: Often. The government shuts down access to social media numerous times this year. 2: Sometimes. The government shuts down access to social media several times this year. 3: Rarely. There have been a few occasions throughout the year when the government shuts down access to social media. 4: Never, or almost never. The government does not interfere with the access to social media, except in the cases mentioned in the clarifications section
+
+**Government social media alternatives (v2smgovsmalt)**
+
+This variable measures whether there is access to non-government controlled platforms. I plan to create an index variable combining government social media shut down in practice, social media alternatives, social media monitoring, and social media censorship in practice.
+
+0: Essentially all social media usage takes place on platforms controlled by the state. 1: Most usage of social media is on state-controlled platforms, although some groups use non- state-controlled alternatives. 2: There is significant usage of both state-controlled and non-state-controlled social media platforms. 3: While some state-controlled social media platforms exist, their usage only represents a small share of social media usage in the country. 4: Practically no one uses state-controlled social media platforms
+
+**Government social media monitoring (v2smgovsmmon)**
+
+This variable measures the extent to which the government surveils social media content. I plan to create an index variable combining government social media shut down in practice, social media alternatives, social media monitoring, and social media censorship in practice.
+
+0: Extremely comprehensive. The government surveils virtually all content on social media. 1: Mostly comprehensive. The government surveils most content on social media, with comprehensive monitoring of most key political issues. 2: Somewhat comprehensive. The government does not universally surveil social media but can be expected to surveil key political issues about half the time. 3: Limited. The government only surveils political content on social media on a limited basis. 4: Not at all, or almost not at all. The government does not surveil political content on social media, with the exceptions mentioned in the clarifications section.
+
+**Government social media censorship in practice (v2smgovsmcenprc)**
+
+This variable measures the extent to which the government actively censors political social media content.
+
+0: The government simply blocks all social media platforms. 1: The government successfully censors all social media with political content. 2: The government successfully censors a significant portion of political content on social media, though not all of it. 3: The government only censors social media with political content that deals with especially sensitive issues. 4: The government does not censor political social media content, with the exceptions mentioned in the clarifications section
+
+**Use of social media to organize offline violence (v2smorgviol)**
+
+This variable measures the usage of social media to organize offline violence.
+
+0: Frequently. There are numerous cases in which people have used social media to organize offline violence. 1: Sometimes. There are a few cases in which people have used social media to organize offline violence. 2: Never. People have never used social media to organize offline violence
+
+**Average people’s use of social media to organize offline action (v2smorgavgact)**
+
+This variable measures specifically average people's use of social media to organize offline violence.
+
+0: Never or almost never. Average people have almost never used social media to organize offline political action. 1: Rarely. Average people do not typically use social media to organize offline political action. 2: Sometimes. There are a few cases in which average people have used social media to organize offline political action. 3: Often. There have been several cases in which average people have used social media to organize offline political action. 4: Regularly. There are numerous cases in which average people have used social media to organize offline political action
+
+**Elites’ use of social media to organize offline action (v2smorgelitact)**
+
+This variable measures specificially "elites" usage of social media to organize political action.
+
+0: Never or almost never. Elites have almost never used social media to organize offline political action. 1: Rarely. Elites do not typically use social media to organize offline political action. 2: Sometimes. There are a few cases in which elites have used social media to organize offline political action. 3: Often. There have been several cases in which elites have used social media to organize offline political action. 4: Regularly. There are numerous cases in which elites have used social media to organize offline political action
+
+**Types of organization through social media (v2smorgtypes)**
+
+These variable measure the present of various modes of political organizing through social media.
+
+0: Petition signing \[v2smorgtypes_0\] 1: Voter turnout \[v2smorgtypes_1\] 2: Street protests \[v2smorgtypes_2\] 3: Strikes/labor actions \[v2smorgtypes_3\] 4: Riots \[v2smorgtypes_4\] 5: Organized rebellion \[v2smorgtypes_5\] 6: Vigilante Justice (e.g., mob lynching, stalking harassment) \[v2smorgtypes_6\] 7: Terrorism \[v2smorgtypes_7\] 8: Ethnic cleansing/genocide \[v2smorgtypes_8\] 9: Other (specify in the next question) \[v2smorgtypes_9\]
+
+**Online harassment groups (v2smhargr)**
+
+These variable measure the present of various modes of online harrassment through social media.
+
+0: Women \[v2smhargr_0\] 1: LGBTQ groups and individuals \[v2smhargr_1\] 2: Specific religious groups \[v2smhargr_2\] 3: Specific ethnic groups \[v2smhargr_3\] 4: Specific caste \[v2smhargr_4\] 5: Specific language groups \[v2smhargr_5\] 6: Specific race \[v2smhargr_6\] 7: People with physical or cognitive disabilities \[v2smhargr_7\] 8: People from specific regions \[v2smhargr_8\] 9: Other (specify in the next question) \[v2smhargr_9\] 10: No group is a specific target \[v2smhargr_10\]
+
+## Control Variables
+
+**Regime Type** **(v2x_regime)**
+
+I plan to control for regime type as the fact that regime is authoritarian may be a confounding variable given that it can impact both the propensity censor and supress activism.
+
+**Online media existence (v2smonex)**
+
+Countries with more access to online internet might see different impact than those where the average citizen doesn't have internet access.
+
+**Education Inequality (e_peedgini)**
+
+More widespread education may correlate with higher democratic activism.
+
+**Civil Society Repression (v2csreprss)**
+
+Countries with legal barriers to activism might suppress potential political outcomes.
+
+**Print Media Diversity (v2merange)**
+
+Access to a variety of forms of media might mitigate the impact of social media supression.
+
+```{r}
+df_vdem |>
+  select(country = country_name, year, socmed_shutdown = v2smgovsm, socmed_alt = v2smgovsmalt, socmed_mon = v2smgovsmmon, socmed_censorship = v2smgovsmcenprc, socmed_violence = v2smorgviol, socmed_av_violence = v2smorgavgact, socmed_el_violence = v2smorgelitact, socmed_petition = v2smorgtypes_0, socmed_voting = v2smorgtypes_1, socmed_protest = v2smorgtypes_2, socmed_strike = v2smorgtypes_3, socmed_riot = v2smorgtypes_4, socmed_rebellions = v2smorgtypes_5, socmed_vigilante = v2smorgtypes_6, socmed_terrorism = v2smorgtypes_7, socmed_genocide = v2smorgtypes_8, socmed_other = v2smorgtypes_9, harrass_women = v2smhargr_0, harrass_LGBTQ = v2smhargr_1, harrass_religion = v2smhargr_2, harras_ethnic = v2smhargr_3, harrass_caste = v2smhargr_4, harrass_language = v2smhargr_5, harrass_race = v2smhargr_6, harrass_disabilities = v2smhargr_7, harrass_regional = v2smhargr_8, harrass_other = v2smhargr_9, harrass_none = v2smhargr_10, regime_type = v2x_regime, digial_media =  v2smonex, educ_inequality = e_peedgini, COS_repression = v2csreprss, media_diversity = v2merange) |> 
+  filter(year == 2023) |> 
+  ggplot(aes(x = socmed_censorship, 
+             y = socmed_violence)) +
+  geom_point() +  # Points for scatterplot
+  geom_smooth(method = "lm", se = FALSE) +  # Optional: Adds a trend line
+  labs(x = "Social Media Censorship in Practice", 
+       y = "Use of Social Media to Organize Offline Political Action",
+       title = "Social Media Censorship vs. Offline Political Action (2023)") +
+  theme_minimal()
+```
+
+My unit of analysis will be countries—as I plan to do a fixed effects. Let's just take a quick look of what a scatterplot of social media censorship and use of social media to organize political action looks like in 2023.
+
+# Main Regression Model
+
+To test the impact of **social media censorship** on different forms of **offline political action**, I will estimate the following **fixed effects linear regression model**:
+
+### **Equation**
+
+For each outcome variable ( $Y_{it}$), I specify the following model:
+
+$$
+Y_{it} = \beta_0 + \beta_1 \text{Censorship}_{it} + \beta_2 \text{RegimeType}_{it} + \beta_3 \text{InternetAccess}_{it} + \beta_4 \text{Education}_{it} + \beta_5 \text{CivilSocietyRestrictions}_{it}  + \beta_6 \text{Media Diversity}_{it}+ \gamma_i + \delta_t + \epsilon_{it}
+$$
+
+### **Variable Definitions**
+
+-   ( $Y_{it}$ ) represents one of the three outcome variables:
+    -   **Online Harassment Groups**\
+    -   **Democratic Activism** (e.g., voter turnout, petitions, protests)\
+    -   **Extremist Mobilization**\
+-   ( $\text{Censorship}_{it}$ ) is the level of social media censorship in country ( i ) at time ( t ).
+-   ( $\text{RegimeType}_{it}$ ) controls for whether the country is a democracy or autocracy.
+-   ( $\text{InternetAccess}_{it}$ ) accounts for internet penetration rates.
+-   ( $\text{Media Diversity}_{it}$ ) is the diversity of non-social media modes of information access
+-   ( $\text{Education}_{it}$ ) measures the level of education.
+-   ( $\text{CivilSocietyRestrictions}_{it}$) accounts for broader repression of civil society.
+-   ( $\gamma_i$) represents **country fixed effects**, controlling for time-invariant country-specific factors.
+-   ( $\delta_t$ ) represents **year fixed effects**, controlling for global trends affecting all countries in a given year.
+-   ( $\epsilon_{it}$ ) is the error term.
+
+This **two-way fixed effects model** isolates the causal effect of censorship by accounting for **both country-specific and time-specific confounders**.
+
+### **Hypothesis Testing**
+
+-   \*\*( $\beta_1$ \< 0 )**: If censorship** reduces democratic activism**, this supports the** supression hypothesis\*\*.
+-   \*\*( $\beta_1 > 0$)**: If censorship** increases extremist mobilization**, this supports the** radicalization hypothesis\*\*.
+-   \*\*( $\beta_1 > 0$ ) for harassment groups**: If censorship** leads to more harassment groups**, this suggests** harrassment hypothesis
