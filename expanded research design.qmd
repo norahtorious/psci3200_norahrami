@@ -1,0 +1,160 @@
+---
+title: "Expanded Research Design"
+author: "Norah Rami"
+institute: "University of Pennsylvania"
+
+date: last-modified
+toc: true
+
+bibliography: bibliography.bib
+
+format: 
+  html:
+    self-contained: true
+
+editor: source
+---
+
+# Social Media Censorship and Political Action in Democracies: Expanded Research Design
+
+## Introduction
+
+Social media is a political battle between activists wishing to speak out against repression and governments wishing to control dissent. Canadian political scientist, Ronald Deibert defines this tension as the era of "contested access." [@deibert_access_2012] Social media has the potential to increase information access and encourage collective organizing. Even in the face of government crackdowns in Saudi Arabia, activists took to Twitter to criticize the ruling family and call for regime changes.\[@pan_how_2020\]. Most scholars credit the internet, with a particular emphasis on Facebook, as catalyzing the Arab Spring uprising. [@ruijgrok_web_2017]. Given social media's revolutionary potential, governments have invested in tools to censor, monitor, and control social media. [@deibert_authoritarianism_2015]. In some cases these repressive measures have remained ineffective, while in others government attacks on free expression on social media platforms have resulted in documented self-censorship, neutralizing the potential of these platforms to be utilized as tools for resistance and information-sharing.[@ong_online_2021] [@zeitzoff_how_2017]
+
+Much scholarship on social media censorship has focused on authoritarian regimes [@reuter_online_2015] as in democratic regimes there is a far wider network of information exchange available [@ruijgrok_web_2017]. However, it is important to recognize that formal democracies also engage in policies of social media censorship and monitoring. The United States has deployed the federal government in widespread social media surveillance campaigns. [@noauthor_social_nodate]
+
+This project focuses on social media repression in formal (electoral) democracies. I am interested in interrogating the relationship between social media repression and the utilization of social media. Social media can be utilized for a variety of political organizing activities, from petition signing to calls for explicit violence. Beyond merely changing the amount of political organizing that occurs on social media platforms, I am also interested in seeing if the character of this organizing changes as well. This research raises implications for how the act of censorship of social media in and of itself challenges both political conversations online, but more importantly the role that it plays in defining political action offline.
+
+## Hypothesis
+
+### H1: Supression Hypothesis
+
+**Expectation:** The presence of [increased]{.underline} social media censorship will [reduce]{.underline} political action organized online.
+
+**Explanation:** There has been plenty of research illustrating that state censorship can be effective in stifling political discourse.[@chan_government_2024] When governments censor social media, it becomes more difficult for activists (regardless of positioning) to organize online. This leads to **lower** political action organized online.
+
+### H2: Backfire Hypothesis
+
+**Expectation:** The presence of [increased]{.underline} social media censorship will only [reduce]{.underline} democratic political action, with no effect on extremist mobilization.
+
+**Explanation:** Social media censorship has had a documented effect on increasing the self-censorship of moderate actors, who have more to lose.[@ong_online_2021] As a result, we will see that only more radical voices will persist online in terms of calling for political action. Thus, the political landscape on social media will become more extremist.
+
+## Data
+
+I will be utilizing the VDem Dataset—an expert-coded data set that accounts for 202 countries. The variables of interest I am examining are from the Digital Society Survey, designed by the Digital Society Project. The principal investigators are Valeriya Mechkova, Daniel Pemstein, Brigitte Seim, and Steven Wilson. The dataset was constructed by a group of experts who coded each country on an ordinal scale of 0-4 for a variety of different traits related to digital society.
+
+### Variables of Interest for Measuring Censorship
+
+**Government social media shut down in practice (v2smgovsm)**
+
+This variable measures how often the government shuts down social media access. I plan to create an index variable combining government social media shut down in practice, social media alternatives, social media monitoring, and social media censorship in practice. A lower value indicates increased shutdowns.
+
+**Government social media alternatives (v2smgovsmalt)**
+
+This variable measures whether there is access to non-government controlled platforms. I plan to create an index variable combining government social media shut down in practice, social media alternatives, social media monitoring, and social media censorship in practice. A higher value indicates more alternatives.
+
+**Government social media monitoring (v2smgovsmmon)**
+
+This variable measures the extent to which the government surveils social media content. I plan to create an index variable combining government social media shut down in practice, social media alternatives, social media monitoring, and social media censorship in practice. Lower values indicate higher rates of monitoring.
+
+**Government social media censorship in practice (v2smgovsmcenprc)**
+
+This variable measures the extent to which the government actively censors political social media content. Lower values indicate higher rates of censorship.
+
+### Variables of Interest for Measuring Political Action Through Social Media
+
+**Use of social media to organize offline violence (v2smorgviol)**
+
+This variable measures the usage of social media to organize offline violence. A lower value indicates a higher usage of social media.
+
+**Average people’s use of social media to organize offline action (v2smorgavgact)**
+
+This variable measures specifically average people's use of social media to organize offline violence. A higher value indicate a higher usage of social media.
+
+**Elites’ use of social media to organize offline action (v2smorgelitact)**
+
+This variable measures specificially "elites" usage of social media to organize political action. A higher value indicate a higher usage of social media.
+
+**Types of organization through social media (v2smorgtypes)**
+
+These variable measure the present of various modes of political organizing through social media. VDem codes for:
+
+-   Petition signing
+
+-   Voter turnout
+
+-   Street protests
+
+-   Strikes/labor actions
+
+-   Riots
+
+-   Organized rebellion
+
+-   Vigilante justice
+
+-   Terrorism
+
+-   Ethnic cleansing/genocide
+
+-   Other
+
+```{r}
+#| echo: false
+#| warning: false
+library (vdemdata)
+library(tidyverse)
+df_vdem <- vdem |>
+  select(country = country_name, year, socmed_shutdown = v2smgovsm, socmed_alt = v2smgovsmalt, socmed_mon = v2smgovsmmon, socmed_censorship = v2smgovsmcenprc, socmed_violence = v2smorgviol, socmed_av_violence = v2smorgavgact, socmed_el_violence = v2smorgelitact, socmed_petition = v2smorgtypes_0, socmed_voting = v2smorgtypes_1, socmed_protest = v2smorgtypes_2, socmed_strike = v2smorgtypes_3, socmed_riot = v2smorgtypes_4, socmed_rebellions = v2smorgtypes_5, socmed_vigilante = v2smorgtypes_6, socmed_terrorism = v2smorgtypes_7, socmed_genocide = v2smorgtypes_8, socmed_other = v2smorgtypes_9, harrass_women = v2smhargr_0, harrass_LGBTQ = v2smhargr_1, harrass_religion = v2smhargr_2, harras_ethnic = v2smhargr_3, harrass_caste = v2smhargr_4, harrass_language = v2smhargr_5, harrass_race = v2smhargr_6, harrass_disabilities = v2smhargr_7, harrass_regional = v2smhargr_8, harrass_other = v2smhargr_9, harrass_none = v2smhargr_10, regime_type = v2x_regime, digial_media =  v2smonex, educ_inequality = e_peedgini, COS_repression = v2csreprss, media_diversity = v2merange) |> 
+  filter(year == 2023) |>
+  filter (regime_type >=1) 
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+ggplot(df_vdem, aes(x = socmed_censorship, y = "Censorship Score")) +
+  geom_boxplot(fill = "lightblue", color = "black") +
+
+  # Single mean point
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 4, color = "darkblue", aes(group = 1)) +
+
+  # Highlighted countries
+  geom_point(data = df_vdem |> filter(country %in% c("United States of America", "Ghana", "Colombia", "Norway")),
+             aes(x = socmed_censorship, y = "Censorship Score", color = country),
+             size = 3, position = position_jitter(width = 0.1, height = 0)) +
+
+  # Country labels
+  geom_text(data = df_vdem |> filter(country %in% c("United States of America", "Ghana", "Colombia", "Norway")),
+            aes(x = socmed_censorship, y = "Censorship Score", label = country, color = country),
+            position = position_jitter(width = 0.2, height = 0.1),
+            vjust = -1, size = 3.5, show.legend = FALSE) +
+
+  labs(x = "Gov't Social Media Censorship (Higher Values Mark More Freedom)", y = "",
+       title = "Distribution of Social Media Freedom in Practice (2023)", subtitle = " ") +
+  theme_minimal() +
+  theme(legend.title = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+
+```
+
+## Research Design
+
+### Regression Model
+
+$$ Y_{it} = \beta_0 + \beta_1 \text{Censorship}_{it} + \gamma_i + \delta_t + \epsilon_{it} $$
+
+I will be using country-level fixed-effects and year-level fixed effects to account for potential confounders.
+
+There are three different modes of social media repression that I am interested in examining: social media censorship, social media monitoring, and access to social media alternatives. Therefore I will run three different models for measuring the treatment of social media repression to see if the mode of repression impacts the means of political action.
+
+For H2, I will create a table and measure each coefficient of each political action included in the VDem dataset. These actions range on the spectrum of "extremism," thus rather than simply categorizing action as "democratic" or "extremist," it is far more insightful to see how specific action plays out.
+
+### Empirical Extension
+
+I will restrict my analysis to democratic countries. There are a number of democracies, such as Nicaragua and India, that employ tools of social media censorship. The structures of government, whether it be electoral or not, will impact the forms of political organizing invoked as well as the freedom of expression, presenting a potential confounder. For example, in an authoritarian government, an activist is much less likely to utilize petitions or elections as politically viable organizing tools. By restricting my analysis to democracies, it would allow me to rule out the differences of political organizing in democracies versus autocracies as a potential confounder.
+
+# References
