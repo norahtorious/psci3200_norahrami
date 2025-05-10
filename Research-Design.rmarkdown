@@ -15,6 +15,8 @@ format:
 editor: source
 ---
 
+
+
 # Social Media Repression and Political Action
 
 Social media is a political battle between activists wishing to speak out against repression and governments wishing to control dissent. Canadian political scientist, Ronald Deibert defines this tension as the era of "contested access."[^1] As social media continues to be utilized to increase information access and encourage collective organizing, governments attempt to police free expression on social media platforms.[^2] In some cases these repressive measures have remained ineffective, while in others government attacks on free expression on social media platforms have resulted in documented self-censorship, neutralizing the potential of these platforms to be utilized as tools for resistance and information-sharing.[^3] One study found that even in the case of government censorship, the internet remained crucial in mobilizing political protests.[^4] However, at the same time, social media is not only a tool for democratic organizing—it has also been utilized as a means of weaponizing and mobilizing sentiment in order to harrass minorities or critics of the government. I am interested in how the presence of censorship upon social media impacts these dual utilities of social media. While the democratizing impacts of social media have been duly studied, I am also interested in the otherside of the coin.
@@ -62,6 +64,8 @@ Social media is a political battle between activists wishing to speak out agains
 
 I will be utilizing the VDem Dataset—an expert-coded data set that accounts for 202 countries. The variables of interest I am examining are from the Digital Society Survey, designed by the Digital Society Project. The principal investigators are Valeriya Mechkova, Daniel Pemstein, Brigitte Seim, and Steven Wilson.
 
+
+
 ```{r}
 #| echo: false
 #| warning: false
@@ -71,6 +75,8 @@ df_vdem <- vdem
 
 
 ```
+
+
 
 ## Variables of Interest
 
@@ -150,6 +156,8 @@ Countries with legal barriers to activism might suppress potential political out
 
 Access to a variety of forms of media might mitigate the impact of social media supression.
 
+
+
 ```{r}
 df_vdem |>
   select(country = country_name, year, socmed_shutdown = v2smgovsm, socmed_alt = v2smgovsmalt, socmed_mon = v2smgovsmmon, socmed_censorship = v2smgovsmcenprc, socmed_violence = v2smorgviol, socmed_av_violence = v2smorgavgact, socmed_el_violence = v2smorgelitact, socmed_petition = v2smorgtypes_0, socmed_voting = v2smorgtypes_1, socmed_protest = v2smorgtypes_2, socmed_strike = v2smorgtypes_3, socmed_riot = v2smorgtypes_4, socmed_rebellions = v2smorgtypes_5, socmed_vigilante = v2smorgtypes_6, socmed_terrorism = v2smorgtypes_7, socmed_genocide = v2smorgtypes_8, socmed_other = v2smorgtypes_9, harrass_women = v2smhargr_0, harrass_LGBTQ = v2smhargr_1, harrass_religion = v2smhargr_2, harras_ethnic = v2smhargr_3, harrass_caste = v2smhargr_4, harrass_language = v2smhargr_5, harrass_race = v2smhargr_6, harrass_disabilities = v2smhargr_7, harrass_regional = v2smhargr_8, harrass_other = v2smhargr_9, harrass_none = v2smhargr_10, regime_type = v2x_regime, digial_media =  v2smonex, educ_inequality = e_peedgini, COS_repression = v2csreprss, media_diversity = v2merange) |> 
@@ -163,6 +171,8 @@ df_vdem |>
        title = "Social Media Censorship vs. Offline Political Action (2023)") +
   theme_minimal()
 ```
+
+
 
 My unit of analysis will be countries—as I plan to do a fixed effects. Let's just take a quick look of what a scatterplot of social media censorship and use of social media to organize political action looks like in 2023.
 
@@ -201,3 +211,4 @@ This **two-way fixed effects model** isolates the causal effect of censorship by
 -   \*\*( $\beta_1$ \< 0 )**: If censorship** reduces democratic activism**, this supports the** supression hypothesis\*\*.
 -   \*\*( $\beta_1 > 0$)**: If censorship** increases extremist mobilization**, this supports the** radicalization hypothesis\*\*.
 -   \*\*( $\beta_1 > 0$ ) for harassment groups**: If censorship** leads to more harassment groups**, this suggests** harrassment hypothesis
+
